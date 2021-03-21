@@ -25,6 +25,7 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 server = app.server
 
+
 app.layout = html.Div([
     html.H2('Filtering Iris Table Example'),
     dcc.Dropdown(
@@ -36,16 +37,15 @@ app.layout = html.Div([
 
 ])
 
-
 @app.callback(dash.dependencies.Output('display-table', 'children'),
               [dash.dependencies.Input('dropdown', 'value')])
 def display_table(value):
     if value is None:
         return generate_table(df)
 
-    dff = df[df['class'] == value]
+    dff = df[df['class']==value]
     return generate_table(dff)
-
+    
 
 if __name__ == '__main__':
     app.run_server(debug=True)
